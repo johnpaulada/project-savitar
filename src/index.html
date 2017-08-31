@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ThankYouSpot</title>
-    <link rel="preload" href="images/bg1.jpg" as="image">
-    <link rel="preload" href="images/bg2.jpg" as="image">
+
+    <title>Project Savitar</title>
+
+    <!-- Add the critical in the src/css/critical.scss file. -->
     <link rel="stylesheet" href="build/critical.min.css">
+
+    <!-- Load the JS and apply them after the DOM has been rendered. -->
     <script defer src="build/main.min.js"></script>
 </head>
 <body>
@@ -22,6 +25,8 @@
         </div>
     </section>
     <footer></footer>
+
+    <!-- The non-critical styles will be applied as soon as they are available. -->
     <noscript id="deferred-styles">
       <link rel="stylesheet" type="text/css" href="build/main.min.css">
     </noscript>
