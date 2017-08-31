@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ThankYouSpot</title>
+    <link rel="preload" href="images/bg1.jpg" as="image">
+    <link rel="preload" href="images/bg2.jpg" as="image">
+    <link rel="stylesheet" href="build/critical.min.css">
+    <script defer src="build/main.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header flex flex--center fullpage bg-image--full bg-image--fixed bg-green">
+            <h1 class="header__title white">Welcome to ThankYouSpot!</h1>
+        </div>
+    </header>
+    <section>
+        <div id="page1" class="page flex flex--center fullpage bg-image--full bg-image--fixed bg-blue">
+            <h2 class="header__title white">Page 1!</h2>
+        </div>
+    </section>
+    <footer></footer>
+    <noscript id="deferred-styles">
+      <link rel="stylesheet" type="text/css" href="build/main.min.css">
+    </noscript>
+    <script>
+      var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+      };
+      var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+          webkitRequestAnimationFrame || msRequestAnimationFrame;
+      if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+      else window.addEventListener('load', loadDeferredStyles);
+    </script>
+</body>
+</html>

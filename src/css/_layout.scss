@@ -1,0 +1,21 @@
+.fullpage {
+    width: 100vw;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex--center {
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-image--full {
+    background-size: cover;
+}
+
+.bg-image--fixed {
+    background-attachment: fixed;
+}
