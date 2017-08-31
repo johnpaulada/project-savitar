@@ -1,7 +1,7 @@
 # Project Savitar
 A fast static site starter kit.
 
-===
+---
 ## Build Process
 
 1. Run `gulp font`
