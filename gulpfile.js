@@ -13,6 +13,7 @@ const wbBuild = require('workbox-build');
 const zopfli = require("gulp-zopfli");
 const replace = require('gulp-replace');
 const fs = require('fs');
+const runSequence = require('run-sequence');
 
 const uglifyCompressOptions = {
   properties: true,
@@ -103,7 +104,9 @@ gulp.task('fonts', () =>
     .pipe(gulp.dest("app/fonts/"))
 )
 
-gulp.task('default', [ 'js', 'html', 'images', 'bundle-sw' ]);
+gulp.task('default', (cb) => {
+  runSequence('css', [ 'js', 'html', 'images', 'fonts', 'bundle-sw' ], cb)
+});
 
 gulp.task('watch', function() {
   gulp.watch('src/*.html', [ 'html', 'bundle-sw' ]);
