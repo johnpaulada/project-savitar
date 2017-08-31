@@ -103,7 +103,7 @@ gulp.task('fonts', () =>
     .pipe(gulp.dest("app/fonts/"))
 )
 
-gulp.task('default', [ 'js', 'css', 'html', 'images', 'bundle-sw' ]);
+gulp.task('default', [ 'js', 'html', 'images', 'bundle-sw' ]);
 
 gulp.task('watch', function() {
   gulp.watch('src/*.html', [ 'html', 'bundle-sw' ]);
