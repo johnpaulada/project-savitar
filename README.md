@@ -37,7 +37,6 @@ When deploying with this project, just deploy the generated `app` directory.
 
 ## Todo
 - WebAssembly (Sample)
-- Server Push CSS and JS (Implement)
 - FastDOM (Sample)
 - Use BEM (Sample)
 - will-change (Sample)
@@ -48,7 +47,8 @@ When deploying with this project, just deploy the generated `app` directory.
 - Use SVG (Sample)
 - Compressor.io (Recommendation)
 - GIFsicle support (Implement)
-- Link in Body vs. CSS Defer (Implement)
 - Nginx Caching (Implement)
 - Cache Busting - gulp-rev (Implement)
 - Gulp prereq arrays (Implement)
+- Trampolining (Sample)
+- Y-Combinator (Sample)
