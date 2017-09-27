@@ -1,2 +1,11 @@
+@import 'reset';
 @import 'layout';
-@import 'sections';
+@import 'sections/sections';
+
+@media (max-width: 480px) {
+    @include header-bg-sm();
+}
+
+@media (min-width: 1440px) {
+    @include header-bg-lg();
+}

@@ -1,0 +1,9 @@
+@import 'sections/sections';
+
+@media (max-width: 480px) {
+    @include page1-bg-sm();
+}
+
+@media (min-width: 1440px) {
+    @include page1-bg-lg();
+}

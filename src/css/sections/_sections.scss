@@ -1,0 +1,23 @@
+@mixin header-bg-lg {
+    .header {
+        background-image: url(/images/bg1-lg.jpg);
+    }
+}
+
+@mixin header-bg-sm {
+    .header {
+        background-image: url(/images/bg1-sm.jpg);
+    }
+}
+
+@mixin page1-bg-lg {
+    #page1 {
+        background-image: url(/images/bg2-lg.jpg);
+    }
+}
+
+@mixin page1-bg-sm {
+    #page1 {
+        background-image: url(/images/bg2-sm.jpg);
+    }
+}

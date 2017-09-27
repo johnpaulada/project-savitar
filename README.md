@@ -22,3 +22,33 @@ When deploying with this project, just deploy the generated `app` directory.
 2. Run `surge`.
 3. Specify the path to the `app` directory.
 4. Set the name of the surge subdomain you'll be deploying to.
+
+## Features
+1. HTML Minification
+2. CSS Minification
+3. JS Uglification
+4. ESNext Support (Babel)
+5. JPEG and PNG compression and SVG Optimization
+6. Progressive Web App
+7. PageSpeed
+8. HTTPS
+9. HTTP/2
+10. gzip
+
+## Todo
+- WebAssembly (Sample)
+- Server Push CSS and JS (Implement)
+- FastDOM (Sample)
+- Use BEM (Sample)
+- will-change (Sample)
+- translateZ(0) (Sample)
+- Web Workers (Sample)
+- requestAnimationFrame (Sample)
+- Picture srcset (Sample)
+- Use SVG (Sample)
+- Compressor.io (Recommendation)
+- GIFsicle support (Implement)
+- Link in Body vs. CSS Defer (Implement)
+- Nginx Caching (Implement)
+- Cache Busting - gulp-rev (Implement)
+- Gulp prereq arrays (Implement)

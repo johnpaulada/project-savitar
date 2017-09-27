@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#2196F3"/>
 
     <title>Project Savitar</title>
 
+    <!-- App Manifest -->
+    <link rel="manifest" href="manifest.json">
+
     <!-- Add the critical in the src/css/critical.scss file. -->
     <link rel="stylesheet" href="build/critical.min.css">
+
+    <!-- Preload assets -->
+    <link rel="preload" href="/images/bg1-sm.jpg" as="image">
+    <link rel="preload" href="/images/bg1-lg.jpg" as="image">
+    <link rel="preload" href="build/colors.min.css" as="style">
+    <link rel="preload" href="build/typography.min.css" as="style">
+    <link rel="preload" href="build/media-queries.min.css" as="style">
+    <link rel="preload" href="build/main.min.css" as="style">
+    <link rel="preload" href="build/main.min.js" as="script">
 
     <!-- Load the JS and apply them after the DOM has been rendered. -->
     <script defer src="build/main.min.js"></script>
@@ -29,6 +42,9 @@
     <!-- The non-critical styles will be applied as soon as they are available. -->
     <noscript id="deferred-styles">
       <link rel="stylesheet" type="text/css" href="build/main.min.css">
+      <link rel="stylesheet" type="text/css" href="build/colors.min.css">
+      <link rel="stylesheet" type="text/css" href="build/typography.min.css">
+      <link rel="stylesheet" type="text/css" href="build/media-queries.min.css">
     </noscript>
     <script>
       var loadDeferredStyles = function() {

@@ -14,6 +14,7 @@ const zopfli = require("gulp-zopfli");
 const replace = require('gulp-replace');
 const fs = require('fs');
 const runSequence = require('run-sequence');
+const cssBase64 = require('gulp-css-base64');
 
 const uglifyCompressOptions = {
   properties: true,
@@ -47,14 +48,21 @@ const replaceCssFileWithStyleElement = (s, filename) => {
 }
 
 gulp.task('html', () =>
-  gulp.src('src/index.html')
+  gulp.src('src/*.html')
     .pipe(replace(criticalCssPattern, replaceCssFileWithStyleElement))
-    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(htmlmin({
+      collapseWhitespace: true,
+      removeComments: true,
+      minifyCSS: true
+    }))
     .pipe(gulp.dest('app/')));
 
 gulp.task('css', () =>
   gulp.src('src/css/*.scss')
     .pipe(sass())
+    // .pipe(cssBase64({
+    //   baseDir: "app"
+    // }))
     .pipe(cleanCSS())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('app/build/'))
@@ -79,13 +87,17 @@ gulp.task('images', () =>
 		.pipe(imagemin([
       imagemin.svgo(),
       imageminJpegRecompress({
-        method: 'smallfry',
-        target: 0.75
+        method: 'smallfry'
       }),
       imageminPngquant()
     ]))
 		.pipe(gulp.dest('app/images/'))
 );
+
+gulp.task('fonts', () =>
+  gulp.src("src/fonts/*/*.ttf")
+    .pipe(gulp.dest("app/fonts/"))
+)
 
 gulp.task('bundle-sw', () => 
   wbBuild.generateSW({
@@ -96,16 +108,13 @@ gulp.task('bundle-sw', () =>
   .catch(err => console.log("An error occured: ", err))
 )
 
-gulp.task('fonts', () =>
-  gulp.src("src/fonts/*/*.ttf")
-    .pipe(zopfli({
-      append: false
-    }))
-    .pipe(gulp.dest("app/fonts/"))
-)
+gulp.task('manifest', () => {
+  gulp.src("src/manifest.json")
+    .pipe(gulp.dest("app"))
+})
 
-gulp.task('default', (cb) => {
-  runSequence('css', [ 'js', 'html', 'images', 'fonts', 'bundle-sw' ], cb)
+gulp.task('default', cb => {
+  runSequence('css', [ 'js', 'html', 'images', 'fonts', 'manifest', 'bundle-sw' ], cb)
 });
 
 gulp.task('watch', function() {

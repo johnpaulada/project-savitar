@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build: ./nginx
+    volumes:
+    - ./app:/etc/nginx/html
+    ports:
+    - "8081:443"
+    environment:
+    - NGINX_HOST=localhost
+    - NGINX_PORT=80
