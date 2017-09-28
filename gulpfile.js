@@ -26,7 +26,7 @@ const uglifyCompressOptions = {
   unused: true,
   toplevel: true,
   inline: true,
-  drop_console: true,
+  // drop_console: true,
   passes: 2
 }
 
@@ -70,7 +70,7 @@ gulp.task('css', () =>
 
 gulp.task('js', function(cb){
   pump([
-    gulp.src('src/js/main.js'),
+    gulp.src('src/js/*.js'),
     babel({presets: 'es2015'}),
     uglify({
       compress: uglifyCompressOptions,

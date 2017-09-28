@@ -5,4 +5,11 @@ if(navigator.serviceWorker) {
   });
 }
 
-var page1 = document.querySelector('#page1').getBoundingClientRect().top
+const animator = new Worker('build/worker.min.js');
+
+function animate(startTime) {
+  animator.postMessage(startTime)
+  requestAnimationFrame(animate)
+}
+
+requestAnimationFrame(animate)

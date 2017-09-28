@@ -593,10 +593,10 @@ binaryextensions@~1.0.0:
   resolved "https://registry.yarnpkg.com/binaryextensions/-/binaryextensions-1.0.1.tgz#1e637488b35b58bda5f4774bf96a5212a8c90755"
 
 bl@^1.0.0:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/bl/-/bl-1.2.1.tgz#cac328f7bee45730d404b692203fcb590e172d5e"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/bl/-/bl-1.1.2.tgz#fdca871a99713aa00d19e3bbba41c44787a65398"
   dependencies:
-    readable-stream "^2.0.5"
+    readable-stream "~2.0.5"
 
 block-stream@*:
   version "0.0.9"
@@ -3028,6 +3028,17 @@ readable-stream@~1.1.9:
     inherits "~2.0.1"
     isarray "0.0.1"
     string_decoder "~0.10.x"
+
+readable-stream@~2.0.5:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "~1.0.0"
+    process-nextick-args "~1.0.6"
+    string_decoder "~0.10.x"
+    util-deprecate "~1.0.1"
 
 rechoir@^0.6.2:
   version "0.6.2"

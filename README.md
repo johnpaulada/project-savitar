@@ -41,8 +41,6 @@ When deploying with this project, just deploy the generated `app` directory.
 - Use BEM (Sample)
 - will-change (Sample)
 - translateZ(0) (Sample)
-- Web Workers (Sample)
-- requestAnimationFrame (Sample)
 - Picture srcset (Sample)
 - Use SVG (Sample)
 - Compressor.io (Recommendation)
