@@ -42,7 +42,6 @@ When deploying with this project, just deploy the generated `app` directory.
 - will-change (Sample)
 - translateZ(0) (Sample)
 - Picture srcset (Sample)
-- Use SVG (Sample)
 - Compressor.io (Recommendation)
 - GIFsicle support (Implement)
 - Nginx Caching (Implement)

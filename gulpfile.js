@@ -15,6 +15,8 @@ const replace = require('gulp-replace');
 const fs = require('fs');
 const runSequence = require('run-sequence');
 const cssBase64 = require('gulp-css-base64');
+const rev = require('gulp-rev');
+const revReplace = require('gulp-rev-replace');
 
 const uglifyCompressOptions = {
   properties: true,
@@ -47,6 +49,8 @@ const replaceCssFileWithStyleElement = (s, filename) => {
   return inlineStyles
 }
 
+const revManifest = gulp.src("rev-manifest.json");
+
 gulp.task('html', () =>
   gulp.src('src/*.html')
     .pipe(replace(criticalCssPattern, replaceCssFileWithStyleElement))
@@ -65,6 +69,8 @@ gulp.task('css', () =>
     // }))
     .pipe(cleanCSS())
     .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('app/build/'))
+    .pipe(rev())
     .pipe(gulp.dest('app/build/'))
 );
 
@@ -95,7 +101,7 @@ gulp.task('images', () =>
 );
 
 gulp.task('fonts', () =>
-  gulp.src("src/fonts/*/*.ttf")
+  gulp.src("src/fonts/*/*.*tf")
     .pipe(gulp.dest("app/fonts/"))
 )
 
@@ -114,13 +120,20 @@ gulp.task('manifest', () => {
 })
 
 gulp.task('default', cb => {
-  runSequence('css', [ 'js', 'html', 'images', 'fonts', 'manifest', 'bundle-sw' ], cb)
+  runSequence('css', [ 'js', 'html', 'images', 'fonts' ], ['rev-replace', 'manifest'], 'bundle-sw', cb)
+});
+
+gulp.task("rev-replace", function(){
+  return gulp.src("app/index.html")
+    .pipe(revReplace({manifest: revManifest}))
+    .pipe(gulp.dest("app/"));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.html', [ 'html', 'bundle-sw' ]);
-  gulp.watch('src/css/*.scss', [ 'css', 'bundle-sw' ]);
-  gulp.watch('src/js/*.js', [ 'js', 'bundle-sw' ]);
-  gulp.watch('src/images/*', [ 'images', 'bundle-sw' ]);
-  gulp.watch('src/fonts/*/*.ttf', [ 'fonts', 'bundle-sw' ]);
+  gulp.watch('src/*.html', [ 'html' ]);
+  gulp.watch('src/css/*.scss', [ 'css' ]);
+  gulp.watch('src/js/*.js', [ 'js' ]);
+  gulp.watch('src/images/*', [ 'images' ]);
+  gulp.watch('src/fonts/*/*.*tf', [ 'fonts' ]);
+  gulp.watch('src/*', [ 'rev-replace', 'bundle-sw' ])
 })
