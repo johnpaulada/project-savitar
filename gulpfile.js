@@ -131,7 +131,7 @@ gulp.task("rev-replace", function(){
 
 gulp.task('watch', function() {
   gulp.watch('src/*.html', [ 'html' ]);
-  gulp.watch('src/css/*.scss', [ 'css' ]);
+  gulp.watch('src/css/*.scss', [ 'css', 'html' ]);
   gulp.watch('src/js/*.js', [ 'js' ]);
   gulp.watch('src/images/*', [ 'images' ]);
   gulp.watch('src/fonts/*/*.*tf', [ 'fonts' ]);
