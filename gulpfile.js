@@ -118,17 +118,17 @@ gulp.task('manifest', () => {
     .pipe(gulp.dest("app"))
 })
 
-gulp.task('revision', ['css', 'js', 'html', 'images', 'fonts'], () => {
-  return gulp.src(tmp + '**/*.{js,scss}')
+gulp.task('revision', () => {
+  return gulp.src(tmp + '**/*.{js,css}')
     .pipe(rev())
-    .pipe(gulp.dest('./app/'))
+    .pipe(gulp.dest('./app/build/'))
     .pipe(rev.manifest())
-    .pipe(revDel({dest: './app/'}))
+    .pipe(revDel({dest: './app/build/'}))
     .pipe(gulp.dest('./app/'))
 })
 
 gulp.task('revreplace', ['revision'], () => {
-  const manifest = gulp.src(tmp + 'rev-manifest.json')
+  const manifest = gulp.src('./app/rev-manifest.json')
 
   return gulp.src(tmp + '**/*.html')
     .pipe(revReplace({manifest}))
@@ -136,12 +136,13 @@ gulp.task('revreplace', ['revision'], () => {
 })
 
 gulp.task('default', cb => {
-  // runSequence('css', [ 'js', 'html', 'images', 'fonts' ], 'manifest', 'bundle-sw' cb)
-  runSequence('revreplace', 'manifest', cb)
+  runSequence('css', ['js', 'html', 'images', 'fonts'], 'revreplace', 'manifest', 'bundle-sw', cb)
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.{js,scss, html}', [ 'revreplace' ]);
+  gulp.watch('src/**/*.{js}', [ 'js', 'revreplace' ]);
+  gulp.watch('src/**/*.{scss}', [ 'css', 'revreplace' ]);
+  gulp.watch('src/**/*.{html}', [ 'html', 'revreplace' ]);
   gulp.watch('src/images/*', [ 'images' ]);
   gulp.watch('src/fonts/*/*.*tf', [ 'fonts' ]);
   gulp.watch('src/*', [ 'bundle-sw' ])

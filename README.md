@@ -34,8 +34,9 @@ When deploying with this project, just deploy the generated `app` directory.
 8. HTTPS
 9. HTTP/2
 10. gzip
+11. Cache Busting w/ gulp-rev
 
-## Todo
+## Roadmap
 - WebAssembly (Sample)
 - FastDOM (Sample)
 - Use BEM (Sample)
@@ -45,7 +46,10 @@ When deploying with this project, just deploy the generated `app` directory.
 - Compressor.io (Recommendation)
 - GIFsicle support (Implement)
 - Nginx Caching (Implement)
-- Cache Busting - gulp-rev (Implement)
-- Gulp prereq arrays (Implement)
 - Trampolining (Sample)
 - Y-Combinator (Sample)
+
+## Cleanup
+- Use variables for the directories
+- Ignore worker.min.js on gulp-rev
+- Add more html files in other folders with their corresponding styles and scripts
