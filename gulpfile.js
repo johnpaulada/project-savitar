@@ -17,6 +17,9 @@ const runSequence = require('run-sequence');
 const cssBase64 = require('gulp-css-base64');
 const rev = require('gulp-rev');
 const revReplace = require('gulp-rev-replace');
+const revDel = require('rev-del');
+
+const tmp = './tmp/'
 
 const uglifyCompressOptions = {
   properties: true,
@@ -42,14 +45,12 @@ const uglifyOutputOptions = {
 
 const criticalCssPattern = /<link rel="stylesheet" href="(.*critical.*)">/g
 const replaceCssFileWithStyleElement = (s, filename) => {
-  const realFilename = 'app/' + filename
+  const realFilename = tmp + filename.replace('build/', '')
   const criticalStyles = fs.readFileSync(realFilename, 'utf8')
   const inlineStyles = '<style>' + criticalStyles + '</style>'
 
   return inlineStyles
 }
-
-const revManifest = gulp.src("rev-manifest.json");
 
 gulp.task('html', () =>
   gulp.src('src/*.html')
@@ -59,7 +60,7 @@ gulp.task('html', () =>
       removeComments: true,
       minifyCSS: true
     }))
-    .pipe(gulp.dest('app/')));
+    .pipe(gulp.dest(tmp)));
 
 gulp.task('css', () =>
   gulp.src('src/css/*.scss')
@@ -69,9 +70,7 @@ gulp.task('css', () =>
     // }))
     .pipe(cleanCSS())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('app/build/'))
-    .pipe(rev())
-    .pipe(gulp.dest('app/build/'))
+    .pipe(gulp.dest(tmp))
 );
 
 gulp.task('js', function(cb){
@@ -84,7 +83,7 @@ gulp.task('js', function(cb){
       output: uglifyOutputOptions
     }),
     rename({suffix: '.min'}),
-    gulp.dest('app/build/')
+    gulp.dest(tmp)
   ], cb)
 });
 
@@ -119,21 +118,31 @@ gulp.task('manifest', () => {
     .pipe(gulp.dest("app"))
 })
 
-gulp.task('default', cb => {
-  runSequence('css', [ 'js', 'html', 'images', 'fonts' ], ['rev-replace', 'manifest'], 'bundle-sw', cb)
-});
+gulp.task('revision', ['css', 'js', 'html', 'images', 'fonts'], () => {
+  return gulp.src(tmp + '**/*.{js,scss}')
+    .pipe(rev())
+    .pipe(gulp.dest('./app/'))
+    .pipe(rev.manifest())
+    .pipe(revDel({dest: './app/'}))
+    .pipe(gulp.dest('./app/'))
+})
 
-gulp.task("rev-replace", function(){
-  return gulp.src("app/index.html")
-    .pipe(revReplace({manifest: revManifest}))
-    .pipe(gulp.dest("app/"));
+gulp.task('revreplace', ['revision'], () => {
+  const manifest = gulp.src(tmp + 'rev-manifest.json')
+
+  return gulp.src(tmp + '**/*.html')
+    .pipe(revReplace({manifest}))
+    .pipe(gulp.dest('./app/'))
+})
+
+gulp.task('default', cb => {
+  // runSequence('css', [ 'js', 'html', 'images', 'fonts' ], 'manifest', 'bundle-sw' cb)
+  runSequence('revreplace', 'manifest', cb)
 });
 
 gulp.task('watch', function() {
-  gulp.watch('src/*.html', [ 'html' ]);
-  gulp.watch('src/css/*.scss', [ 'css', 'html' ]);
-  gulp.watch('src/js/*.js', [ 'js' ]);
+  gulp.watch('src/**/*.{js,scss, html}', [ 'revreplace' ]);
   gulp.watch('src/images/*', [ 'images' ]);
   gulp.watch('src/fonts/*/*.*tf', [ 'fonts' ]);
-  gulp.watch('src/*', [ 'rev-replace', 'bundle-sw' ])
+  gulp.watch('src/*', [ 'bundle-sw' ])
 })

@@ -22,6 +22,7 @@
     "imagemin-pngquant": "^5.0.1",
     "node-sass": "^4.5.3",
     "pump": "^1.0.2",
+    "rev-del": "^1.0.5",
     "run-sequence": "^2.1.0",
     "uglify-js": "^3.0.28",
     "workbox-build": "^2.0.0"
