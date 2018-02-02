@@ -43,11 +43,13 @@ When deploying with this project, just deploy the generated `app` directory.
 - will-change (Sample)
 - translateZ(0) (Sample)
 - Picture srcset (Sample)
-- Compressor.io (Recommendation)
 - GIFsicle support (Implement)
 - Nginx Caching (Implement)
 - Trampolining (Sample)
 - Y-Combinator (Sample)
+
+## Recommendations
+- Use [Compressor.io](https://compressor.io) for compressing files.
 
 ## Cleanup
 - Use variables for the directories
