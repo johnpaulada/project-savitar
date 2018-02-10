@@ -47,6 +47,7 @@ When deploying with this project, just deploy the generated `app` directory.
 - Nginx Caching (Implement)
 - Trampolining (Sample)
 - Y-Combinator (Sample)
+- Use preconnect
 
 ## Recommendations
 - Use [Compressor.io](https://compressor.io) for compressing files.
