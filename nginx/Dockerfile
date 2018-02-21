@@ -13,7 +13,7 @@ RUN apt-get install \
 	wget \
 	unzip -y
 RUN apt-get install nginx -y
-ENV NGINX_VERSION 1.13.3
+ENV NGINX_VERSION 1.13.9
 ENV NPS_VERSION 1.12.34.2-stable
 ENV NPS_RELEASE_NUMBER $NPS_VERSION/beta/
 ENV NPS_RELEASE_NUMBER $NPS_VERSION/stable/
